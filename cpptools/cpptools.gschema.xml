@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<schemalist>
+	<enum id="ru.qarga.cpptools.formatstyle">
+		<value nick="LLVM" value="1"/>
+		<value nick="Google" value="2"/>
+		<value nick="Chromium" value="3"/>
+		<value nick="Mozilla" value="4"/>
+		<value nick="WebKit" value="5"/>
+	</enum>
+
+	<schema path="/ru/qarga/cpptools/" id="ru.qarga.cpptools">
+		<key name="formatstyle" type="s">
+			<default>'LLVM'</default>
+		</key>
+		<key name="includes" type="s">
+			<default>''</default>
+		</key>
+	</schema>
+</schemalist>

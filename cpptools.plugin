@@ -1,0 +1,11 @@
+[Plugin]
+Loader=python3
+Module=cpptools
+IAge=3
+Name=C++ Tools
+Name[ru]=C++ инструменты
+Description=Gedit plugin for autocomplete/format/lint C/C++/Obj-C code
+Description[ru]=Gedit плагин для автодополнения/форматирования/статического анализа C/C++/Obj-C кода
+Authors=StarTek <star.tek.mb@gmail.com>
+Copyright=Copyright © 2016 StarTek
+Website=http://qarga.ru
