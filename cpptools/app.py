@@ -19,10 +19,8 @@ class CppToolsAppPlugin(GObject.Object, Gedit.AppActivatable, PeasGtk.Configurab
 
 	def do_activate(self):
 		self.menu_ext = self.extend_menu("tools-section-1")
-		item = Gio.MenuItem()
-		item.set_attribute_value("accel", GLib.Variant("s", "<Alt><Shift>F"))
-		item.set_attribute_value("label", GLib.Variant("s", _("Format code")))
-		item.set_attribute_value("action", GLib.Variant("s", "win.formatcode"))
+		self.app.add_accelerator("<Alt><Shift>F", "win.formatcode", None)
+		item = Gio.MenuItem.new(_("Format code"), "win.formatcode")
 		self.menu_ext.append_menu_item(item)
 
 	def do_create_configure_widget(self):

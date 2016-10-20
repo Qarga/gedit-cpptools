@@ -58,12 +58,11 @@ class CppToolsAutocompleteProvider(GObject.Object, GtkSource.CompletionProvider)
 
 		# check if we are complete after this characters
 		if last_char != '.' and last_char != ':' and last_char != ',' and last_char != '(' and last_char != '<' and last_char != '>' and last_char != '\t' and last_char != ' ':
-
 			# filter old completions
 			newproposals = list()
 			if self.index != -1:
 				for prop in self.proposals:
-					if prop.get_text().startswith(line[self.index:]):
+					if prop.get_text().startswith(line[self.index:col-1]):
 						newproposals.append(prop)
 
 			context.add_proposals(self, newproposals, True)
@@ -79,8 +78,8 @@ class CppToolsAutocompleteProvider(GObject.Object, GtkSource.CompletionProvider)
 			includes += "-I" + inc + " "
 
 		# execute autocomplete provider
-		cmd = "clang -cc1 -fsyntax-only -x c++ -std=c++11 " + includes + " -code-completion-at=-:{}:{} -".format(row, col)
-		print(cmd)
+		cmd = "clang -cc1 -fsyntax-only -x c++ -std=c++11 -code-completion-macros " + includes + " -code-completion-at=-:{}:{} -".format(row, col)
+
 		p = Popen(cmd, cwd=os.path.dirname(doc.get_uri_for_display()), shell=True, stdout=PIPE, stdin=PIPE, stderr=PIPE)
 		output, err = p.communicate(input = text.encode())
 

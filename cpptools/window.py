@@ -5,7 +5,7 @@ from settings import settings
 
 # Window Plugin
 class CppToolsWindowPlugin(GObject.Object, Gedit.WindowActivatable):
-	__gtype_name__ = "CppToolsPlugin"
+	__gtype_name__ = "CppToolsWindowPlugin"
 
 	window = GObject.property(type = Gedit.Window)
 
@@ -19,7 +19,7 @@ class CppToolsWindowPlugin(GObject.Object, Gedit.WindowActivatable):
 	def register(self, window, tab):
 		# check language
 		language = tab.get_document().get_language().get_name()
-		if language != "C" and language != "C++":
+		if language != "C" and language.find("C++") == -1:
 			return
 
 		# check if provider exists
@@ -66,6 +66,6 @@ class CppToolsWindowPlugin(GObject.Object, Gedit.WindowActivatable):
 		self.register(self.window, self.window.get_active_tab())
 
 		language = self.window.get_active_tab().get_document().get_language().get_name()
-		enabled = (language == "C" or language == "C++")
+		enabled = (language == "C" or language.find("C++") != -1)
 		self.window.lookup_action("formatcode").set_enabled(enabled)
 		pass
